@@ -1,8 +1,17 @@
 const express = require('express')
+const mongoose = require('mongoose')
+
+const routes = require('./routes')
 
 const app = express()
 
+mongoose.connect('mongodb+srv://mayronsouza:joaovivi13@omnistackms-oylq5.mongodb.net/week10?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+
 app.use(express.json())
+app.use(routes)
 
 // Métodos HTTP: GET, POST, PUT, DELETE
 
@@ -12,9 +21,5 @@ app.use(express.json())
     // Body: req.body (Dados para criação e alteração de um registro)
 
 // MongoDB (Náo-relacional)
-
-app.post('/users', (req,res) => {
-    return res.json(req.body)
-})
 
 app.listen(3333, () => console.log('Server on line...'))
