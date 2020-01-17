@@ -1,6 +1,8 @@
 const axios = require('axios') // Módulo do Axios
+const mongoose = require('mongoose')
 
 const Dev = require('../models/Dev') // Buscando o modelo Dev em src/models
+const parseStringAsArray = require('../utils/parseStringAsArray')
 
 // Métodos
     //index = listar recursos;
@@ -33,7 +35,7 @@ module.exports = {
             // Tratando as techs, que vieram no req.body
             // O split() retorna um array
             // O map() retorna um novo array e o trim() retira os espaços
-            const techsArray = techs.split(',').map(tech => tech.trim())
+            const techsArray = parseStringAsArray(techs)
         
             const location = { // Localização para compor o Dev no BD
                 type: 'Point',
@@ -52,5 +54,11 @@ module.exports = {
             return res.status(201).json(dev)
         }    
         return res.json(dev)
+    },
+    async update(req, res) {
+        
+    },
+    async destroy(req, res) {
+        
     }
 }
